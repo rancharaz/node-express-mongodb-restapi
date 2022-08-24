@@ -1,0 +1,14 @@
+npm install - the api is quite well documented
+
+do make a db restapi with a collection of students with data below or if you want to change, put yours into the collection
+and model student.model.js
+
+{
+        
+        "first_name": "mano",
+        "last_name": "data",
+        "email": "data@hotmail.com",
+        "password": "3333"
+    }
+
+open the server node server.js
