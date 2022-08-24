@@ -20,7 +20,7 @@ studentExpressRoute.route('/').get((req, res) => {
 
 //endpoint for searching into id
 studentExpressRoute.route('/student/:id').get((req,res)=> {
-    StudentSchema.findById(req.params.id, (error, data) => {
+    StudentSchema.findById(req.params.id, (error, data) => { //function find by id
         if (error) {
             return next(error)
         } else {
@@ -40,5 +40,30 @@ studentExpressRoute.route('/add-student').post((req, res, next) => {
     })
 })
 
+//endpoint for delete into id
+studentExpressRoute.route('/delete-student/:id').delete((req,res)=> {
+    StudentSchema.findByIdAndDelete(req.params.id, (error, data) => { //function find by id and delete
+        if (error) {
+            return next(error)
+        } else {
+            res.status(200).json({
+                msg:data
+            })
+        }
+    })
+})
 
+//
+
+//update endpoint via id
+studentExpressRoute.route('/update-student/:id').put((req,res)=> {
+    StudentSchema.findByIdAndUpdate(req.params.id,{$set: req.body}, (error, data) => { //function find by id and update
+        if (error) {
+            return next(error)
+        } else {
+            res.json(data);
+            console.log('Updated successfully')
+        }
+    })
+})
 module.exports = studentExpressRoute;
