@@ -2,12 +2,14 @@
  
 let express = require('express');
 const createError = require('http-errors');
+ 
 
 path = require('path');
 mongoose = require('mongoose');
 cors = require('cors');
 bodyParser = require('body-parser');
 dbConfig = require('./db/database')
+require('dotenv').config()
 
 //database connection
 mongoose.Promise = global.Promise;
@@ -39,6 +41,17 @@ const port = process.env.PORT || 8080;
 const server = app.listen(port, () => {
     console.log(`Port is connected to: ${port}`)
 })
+
+// Connect to MongoDB
+mongoose.connect('mongodb+srv://rancharaz:trustmongodb%402021@cluster0.evgjrvb.mongodb.net/restapi', {useNewUrlParser: true});
+mongoose.connection.once('open', function(){
+  console.log('Conection has been made!');
+}).on('error', function(error){
+    console.log('Error is: ', error);
+});
+
+
+
  //catching errors //testing
 app.use((req, res, next) => {
     next(createError(404))
